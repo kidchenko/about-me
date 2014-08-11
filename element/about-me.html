@@ -4,34 +4,82 @@
 
 <!-- Define your custom element -->
 <polymer-element name="about-me" attributes="user apikey extended">
-	<template>
-	    <core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}&extended={{extended}}" handleAs="json" response="{{resp}}"></core-ajax>
 
-	    <p>about.me</p>
-	    <img src="{{resp.avatar}}">
-	    <a href="{{resp.profile}}" target="_blank">
-			<p>{{resp.display_name}} - {{resp.user_name}}!</p>
-	    </a>
-	    <ul>
-	    	<template repeat="{{site in resp.websites}}">
-	    		<template if="{{site.platform == 'link'}}">
-	    			<li>
-    				<a href="{{site.site_url}}">
-    					<img src="{{site.icon_url}}">
-    					{{site.display_name}}
-    				</a>	
-    			</li>
-	    		</template>
-	    	</template>
-	    </ul>
-	</template>
-	<script>
-		(function() {
-			Polymer('about-me', {
-				user: 'kiide',
-				apikey: '999fd10e0a46809709e3e77c8ab85ea560e2b01e',
-				extended: true
-			});
-		})();
-	</script>
+
+<template>
+	<style type="text/css">
+	* {
+		font-family: proxima-nova-1, proxima-nova-2, Tahoma, Helvetica, Verdana, sans-serif;
+		color: #2b82ad
+	}
+
+	a {
+		text-decoration: none;
+	}
+		a:hover {
+			color: #00405d;
+		}
+		a:visited {
+			color: #062f3c;
+		}
+
+
+	.avatar-container {
+		display: inline-block;
+		text-align: center;
+	}
+	.avatar {
+		height: 120px;
+		width: 120px;
+		border-radius: 100%;
+		display: block;
+		border: 5px solid #062f3c;
+		box-sizing: border-box;
+	}
+
+	.avatar+span {
+		/*position: absolute;*/	
+		top: 120px;
+	}
+
+	ul {
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+	</style>
+
+	<core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}&extended={{extended}}" handleAs="json" response="{{resp}}"></core-ajax>
+
+	<div class="avatar-container">
+		<img class="avatar" src="{{resp.avatar}}"/>
+		<a href="{{resp.profile}}">{{resp.user_name}}</a>
+	</div>
+	<div>
+		<span>{{resp.display_name}}</span>
+	</div>
+	<ul>
+		<template repeat="{{site in resp.websites}}">
+			<template if="{{site.platform == 'link'}}">
+				<li>
+					<a href="{{site.site_url}}">
+						<img src="{{site.icon_url}}">
+						{{site.display_name}}
+					</a>	
+				</li>
+			</template>
+		</template>
+	</ul>
+</template>
+<script>
+(function() {
+	Polymer('about-me', {
+		user: 'kiide',
+		apikey: '999fd10e0a46809709e3e77c8ab85ea560e2b01e',
+		extended: true
+	});
+})();
+</script>
 </polymer-element>
