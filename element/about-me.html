@@ -7,7 +7,10 @@
 	<template>
 	    <core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}" handleAs="json" response="{{resp}}"></core-ajax>
 
-		<p>Hello World {{resp.user_name}}!</p>
+	    <p>about.me</p>
+	    <a href="{{resp.profile}}" target="_blank">
+			<p>{{resp.display_name}} - {{resp.user_name}}!</p>
+	    </a>
 	</template>
 	<script>
 		(function() {
