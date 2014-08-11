@@ -1,0 +1,29 @@
+{
+  "name": "about-me",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kiide/about-me",
+  "authors": [
+    "kiide <kiide@gmail.com>"
+  ],
+  "description": "A web component to show your about.me profile",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "profile",
+    "about.me",
+    "about",
+    "me",
+    "about"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.5"
+  }
+}
