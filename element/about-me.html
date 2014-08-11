@@ -5,18 +5,32 @@
 <!-- Define your custom element -->
 <polymer-element name="about-me" attributes="user apikey extended">
 	<template>
-	    <core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}" handleAs="json" response="{{resp}}"></core-ajax>
+	    <core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}&extended={{extended}}" handleAs="json" response="{{resp}}"></core-ajax>
 
 	    <p>about.me</p>
+	    <img src="{{resp.avatar}}">
 	    <a href="{{resp.profile}}" target="_blank">
 			<p>{{resp.display_name}} - {{resp.user_name}}!</p>
 	    </a>
+	    <ul>
+	    	<template repeat="{{site in resp.websites}}">
+	    		<template if="{{site.platform == 'link'}}">
+	    			<li>
+    				<a href="{{site.site_url}}">
+    					<img src="{{site.icon_url}}">
+    					{{site.display_name}}
+    				</a>	
+    			</li>
+	    		</template>
+	    	</template>
+	    </ul>
 	</template>
 	<script>
 		(function() {
 			Polymer('about-me', {
 				user: 'kiide',
-				apikey: '999fd10e0a46809709e3e77c8ab85ea560e2b01e'
+				apikey: '999fd10e0a46809709e3e77c8ab85ea560e2b01e',
+				extended: true
 			});
 		})();
 	</script>
