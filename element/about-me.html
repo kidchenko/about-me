@@ -1,12 +1,20 @@
 <!-- Import Polymer -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 
 <!-- Define your custom element -->
-<polymer-element name="about-me">
+<polymer-element name="about-me" attributes="user apikey extended">
 	<template>
-		<p>Hello World!</p>
+	    <core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}" handleAs="json" response="{{resp}}"></core-ajax>
+
+		<p>Hello World {{resp.user_name}}!</p>
 	</template>
 	<script>
-		Polymer('about-me');
+		(function() {
+			Polymer('about-me', {
+				user: 'kiide',
+				apikey: '999fd10e0a46809709e3e77c8ab85ea560e2b01e'
+			});
+		})();
 	</script>
 </polymer-element>
