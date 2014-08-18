@@ -101,7 +101,11 @@ header {
   background-color: #062f3c;
   height: 300px;
   padding: 30px;
+  position: fixed;
   text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 header h1 {
@@ -126,8 +130,12 @@ header .social-buttons {
   margin: 0 auto;
 }
 
-
-
+#container {
+  background: #fff;
+  position: absolute;
+  top: 300px;
+  z-index: 2;
+}
 
 
 
