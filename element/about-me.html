@@ -6,72 +6,103 @@
 <polymer-element name="about-me" attributes="user apikey extended">
 
 
-<template>
+	<template>
 	<style type="text/css">
-	* {
+	/*****
+	elements style
+	*/
+	*{
 		font-family: proxima-nova-1, proxima-nova-2, Tahoma, Helvetica, Verdana, sans-serif;
-		color: #2b82ad
+		color: #2b82ad;
 	}
-
+	ul {
+		padding: 0;
+	}
+	li {
+		list-style: none;
+	}
 	a {
 		text-decoration: none;
 	}
-		a:hover {
-			color: #00405d;
-		}
-		a:visited {
-			color: #062f3c;
-		}
-
-
+	a:visited {
+		color: #2b82ad;
+	}
+	a:hover {
+		color: #00405d;
+	}
+	/*****
+	class style
+	*/
+	.component {
+		display: block;
+		padding: .1em;
+	}
 	.avatar-container {
-		display: inline-block;
-		text-align: center;
+		background-color: #0f0f0f;
+		height: 120px;
+		width: 120px;
+		border-radius: 100%;
 	}
 	.avatar {
 		height: 120px;
 		width: 120px;
-		border-radius: 100%;
+		border-radius: 50%;
 		display: block;
-		border: 5px solid #062f3c;
+		border: 3px solid #062f3c;
 		box-sizing: border-box;
+		background: #000;
 	}
-
-	.avatar+span {
-		/*position: absolute;*/	
-		top: 120px;
+	.profile {
+		text-align: center;
+		width: 120px;
+		position: relative;
 	}
-
-	ul {
-		padding: 0;
+	.profile:hover .avatar-container .avatar {
+		-webkit-filter: blur(2px);
+		transition: opacity .4s, -webkit-filter .4s;
+		opacity: 0.3;
 	}
-
-	li {
-		list-style: none;
+	.profile:hover .user-name {
+		display: inline;
+		color: #b8d5e3;
+		font-weight: bold;
+	}
+	.profile .user-name {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 45%;
+		bottom: 45%;
+		margin: auto;
+		display:none;
+		z-index: 1;
 	}
 	</style>
 
 	<core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}&extended={{extended}}" handleAs="json" response="{{resp}}"></core-ajax>
-
-	<div class="avatar-container">
-		<img class="avatar" src="{{resp.avatar}}"/>
-		<a href="{{resp.profile}}">{{resp.user_name}}</a>
-	</div>
-	<div>
-		<span>{{resp.display_name}}</span>
-	</div>
-	<ul>
-		<template repeat="{{site in resp.websites}}">
-			<template if="{{site.platform == 'link'}}">
-				<li>
-					<a href="{{site.site_url}}">
-						<img src="{{site.icon_url}}">
-						{{site.display_name}}
-					</a>	
-				</li>
+	<div class="component">
+		<div class="profile">
+			<a class="user-name" href="{{resp.profile}}">{{resp.user_name}}</a>
+			<div class="avatar-container">
+				<img class="avatar" src="{{resp.avatar}}" alt="" />
+			</div>
+		</div>
+		<div class="">
+			<span>{{resp.display_name}}</span>
+		</div>
+		<ul>
+			<template repeat="{{site in resp.websites}}">
+				<template if="{{site.platform == 'link'}}">
+					<li>
+						<a href="{{site.site_url}}">
+							<img src="{{site.icon_url}}">
+							{{site.display_name}}
+						</a>
+					</li>
+				</template>
 			</template>
-		</template>
-	</ul>
+		</ul>
+	</div>
 </template>
 <script>
 (function() {
