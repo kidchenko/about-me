@@ -4,79 +4,80 @@
 
 <!-- Define your custom element -->
 <polymer-element name="about-me" attributes="user apikey extended">
-
-
 	<template>
 	<style type="text/css">
-	/*****
-	elements style
-	*/
-	*{
-		font-family: proxima-nova-1, proxima-nova-2, Tahoma, Helvetica, Verdana, sans-serif;
-		color: #2b82ad;
-	}
-	ul {
-		padding: 0;
-	}
-	li {
-		list-style: none;
-	}
-	a {
-		text-decoration: none;
-	}
-	a:visited {
-		color: #2b82ad;
-	}
-	a:hover {
-		color: #00405d;
-	}
-	/*****
-	class style
-	*/
-	.component {
-		display: block;
-		padding: .1em;
-	}
-	.avatar-container {
-		background-color: #0f0f0f;
-		height: 120px;
-		width: 120px;
-		border-radius: 100%;
-	}
-	.avatar {
-		height: 120px;
-		width: 120px;
-		border-radius: 50%;
-		display: block;
-		border: 3px solid #062f3c;
-		box-sizing: border-box;
-		background: #000;
-	}
-	.profile {
-		text-align: center;
-		width: 120px;
-		position: relative;
-	}
-	.profile:hover .avatar-container .avatar {
-		-webkit-filter: blur(2px);
-		transition: opacity .4s, -webkit-filter .4s;
-		opacity: 0.3;
-	}
-	.profile:hover .user-name {
-		display: inline;
-		color: #b8d5e3;
-		font-weight: bold;
-	}
-	.profile .user-name {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 45%;
-		bottom: 45%;
-		margin: auto;
-		display:none;
-		z-index: 1;
-	}
+		/*****
+		elements style
+		*/
+		* {
+			color: #2b82ad;
+			font-family: proxima-nova-1, proxima-nova-2, Tahoma, Helvetica, Verdana, sans-serif;
+		}
+
+		ul { padding: 0; }
+
+		li { list-style: none; }
+
+		a { text-decoration: none; }
+
+			a:visited { color: #2b82ad; }
+
+			a:hover { color: #00405d; }
+
+		/*****
+		class style
+		*/
+		.component {
+			display: block;
+			padding: .1em;
+		}
+
+		.avatar-container {
+			background: #0f0f0f;
+			border-radius: 50%;
+			height: 120px;
+			width: 120px;
+		}
+
+		.avatar {
+			-moz-box-sizing: border-box;
+			-webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 1);
+			background: #0f0f0f;
+			border-radius: 50%;
+			border: 3px solid rgba(6, 47, 60, 1);
+			box-sizing: border-box;
+			display: block;
+			height: 120px;
+			width: 120px;
+		}
+
+		.profile {
+			position: relative;
+			text-align: center;
+			width: 120px;
+		}
+
+		.profile .user-name {
+			bottom: 45%;
+			display: none;
+			left: 0;
+			margin: auto;
+			position: absolute;
+			right: 0;
+			top: 45%;
+			z-index: 1;
+		}
+			.profile:hover .avatar-container .avatar {
+				-webkit-filter: blur(2px);
+				-webkit-transition: opacity .4s, -webkit-filter .4s;
+				opacity: 0.3;
+				transition: opacity .4s, -webkit-filter .4s;
+			}
+			.profile:hover .user-name {
+				color: #b8d5e3;
+				display: inline;
+				font-weight: bold;
+			}
 	</style>
 
 	<core-ajax auto url="https://api.about.me/api/v2/json/user/view/{{user}}?client_id={{apikey}}&extended={{extended}}" handleAs="json" response="{{resp}}"></core-ajax>
